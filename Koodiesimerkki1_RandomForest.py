@@ -20,12 +20,11 @@ df = pd.read_csv('global_traffic_accidents.csv', delimiter=',', quotechar='"')
 # Display check
 print(df.head())
 
-#drop useless data, location info already in Location
+#drop useless data
 df = df.drop(['Accident ID', 'Latitude', 'Longitude'], axis=1)
 df = df.drop(['Date'], axis=1) 
 df = df.drop(['Time'], axis=1)
 df = df.drop(['Location'], axis=1)
-#df = df.drop(['Vehicles Involved'], axis=1) #viidestoista(15) column
 
 
 
@@ -35,8 +34,8 @@ data_transformed = ct.fit_transform(df)
 
 letsTry = pd.DataFrame(data_transformed)
 
-
-X = letsTry.drop(letsTry.columns[15], axis=1) #0-14 dummmies, 15 Casualties
+#Ennustetaan Vehicles Involved arvoa
+X = letsTry.drop(letsTry.columns[15], axis=1) #0-14 dummmies, 16 Casualties
 y = letsTry.iloc[:, 15] #Vehicles involved
 
 
@@ -50,7 +49,8 @@ model = RandomForestRegressor(n_estimators=100, random_state=2)
 # Train the model
 model.fit(X_train, y_train)
 
-# # Show Feature Importances
+#-----------------Feature Importance ------------------------
+
 # importances = model.feature_importances_
 
 # # If you used ColumnTransformer + OneHotEncoder, get the correct feature names
@@ -70,7 +70,7 @@ model.fit(X_train, y_train)
 # # Print the ranked list
 # print("\nFeature Importances:")
 # print(importance_df.to_string(index=False))
-
+#-----------------Feature Importance ends ------------------------
 
 
 y_pred = model.predict(X_test)

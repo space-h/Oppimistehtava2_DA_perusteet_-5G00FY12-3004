@@ -18,10 +18,10 @@ whereWeAt = "All Locations"
 #Helpottaa printtiä kun tallentaa muuttujaksi
 epokit = 100
 
-# #kommentoi pois niin saa kaikki sijainnit
-# whereWeAt = 'Toronto, Canada'
-# df = df[df['Location'] == 'Toronto, Canada']
-# #Tähän asti
+#kommentoi pois niin saa kaikki sijainnit
+whereWeAt = 'Toronto, Canada'
+df = df[df['Location'] == 'Toronto, Canada']
+#Tähän asti
 
 
 # Drop unnecessary columns
@@ -36,16 +36,18 @@ ct = ColumnTransformer(
 data_transformed = ct.fit_transform(df)
 letsTry = pd.DataFrame(data_transformed)
 
-#Jos haluaa ennustaa Casualties Vehicles Involved sijaan
+# #Jos haluaa ennustaa Casualties Vehicles Involved sijaan
 # # Define features (X) and target (y) for predicting Casualties
 # X = letsTry.drop(letsTry.columns[16], axis=1)  # Drop 'Casualties' column
 # y = letsTry.iloc[:, 16]  # Casualties
 
 
 
-# Define features (X) and target (y) for predicting Casualties
-X = letsTry.drop(letsTry.columns[15], axis=1)  # Drop 'Vehicles Involved' column
+# Define features (X) and target (y) for predicting V-I
+X = letsTry.drop(letsTry.columns[15], axis=1)  #0-14 dummmies, 16 Casualties
 y = letsTry.iloc[:, 15]  # Vehicles Involved
+
+
 
 # Normalize features
 scaler = StandardScaler()
