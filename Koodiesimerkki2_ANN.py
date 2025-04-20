@@ -40,7 +40,7 @@ letsTry = pd.DataFrame(data_transformed)
 # # Define features (X) and target (y) for predicting Casualties
 # X = letsTry.drop(letsTry.columns[16], axis=1)  # Drop 'Casualties' column
 # y = letsTry.iloc[:, 16]  # Casualties
-## -------------Tähän asti-----------
+## -------------Tähän asti, ja kommentoi pois seuraava kohta-----------
 
 
 # Define features (X) and target (y) for predicting V-I
